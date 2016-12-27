@@ -1,5 +1,5 @@
-# accommodator
-Part of the Logro progrject, this is a microservice which assists the front-end apps.
+# kind-assistant
+Part of the Logro project, this is a microservice which assists the front-end apps.
 
 # License
 GPLv3
