@@ -22,7 +22,8 @@
 module.exports = {
 
   db: process.env.MONGODB || process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test',
-
   sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
+  gatewayServer: '0.0.0.0',
+  gatewayPort: '9000',
 
 };

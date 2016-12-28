@@ -1,11 +1,13 @@
 var _ = require('lodash');
 var async = require('async');
-var crypto = require('crypto');
-var nodemailer = require('nodemailer');
-var passport = require('passport');
 var User = require('../models/User');
 var secrets = require('../config/secrets');
+var fetchUrl = require('fetch').fetchUrl;
 
+var config = {
+	"ip": secrets.gatewayServer,
+	"gatewayPort": secrets.gatewayPort,
+}
 
 /**
  * Require login routing middleware
@@ -25,6 +27,7 @@ exports.requiresLogin = function(req, res, next) {
  * Log out.
  */
 exports.postRemoteLogout = function(req, res) {
+	// TODO: Refactor this method to redirect authentication to fixed-gateway at port 9000
   req.logout();
   res.send({ customCode: 2001, status: 'Success', msg: 'Success! You are logged out.' });
 };
@@ -34,6 +37,7 @@ exports.postRemoteLogout = function(req, res) {
  * Create a new local account.
  */
 exports.postRemoteSignup = function(req, res, next) {
+	// TODO: Refactor this method to redirect authentication to fixed-gateway at port 9000
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.assert('confirmPassword', 'Passwords do not match').equals(req.assert('password').value);
@@ -73,7 +77,26 @@ console.log(req.assert('email').value);
  */
 exports.postRemoteLogin = function(req, res, next) {
 
-	// TODO: Forward to fixed gateway
-	console.log('herfsfsdfdsfe===========');
+	//postRemoteLogin (remote to :9000)
+	var options = {
+		// headers:{
+		// 	"X-My-Header": "This is a custom header field"
+		// },
+		method: 'post',
+	};
+
+	var email = req.query.email
+	var password = req.query.password
+
+	fetchUrl('http://' + config.ip + ':' + config.gatewayPort + '/postRemoteLogin' + '/?email=' + email + '&password=' + password,
+		options,
+		function(error, meta, body){
+			if (error) {
+				res.status(400).send(error);
+			} else {
+				res.send(body.toString());
+			}
+
+	});
 
 };
