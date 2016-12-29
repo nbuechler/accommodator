@@ -1,6 +1,6 @@
 {
   "name": "kind-assistant",
-  "version": "0.2.5",
+  "version": "0.2.7",
   "repository": {
     "type": "git",
     "url": "https://github.com/nbuechler/kind-assistant"
@@ -31,7 +31,7 @@
     "express-session": "^1.11.3",
     "express-validator": "^2.17.1",
     "fbgraph": "^1.1.0",
-    "fetch": "^0.3.6",
+    "fetch": "^1.1.0",
     "github-api": "^0.10.6",
     "instagram-node": "^0.5.8",
     "jade": "^1.11.0",
