@@ -22,35 +22,14 @@ exports.requiresLogin = function(req, res, next) {
 	next();
 };
 
+
 /**
- * POST /postRemoteLogout
- * Log out.
+ * Global authentication variables
  */
-exports.postRemoteLogout = function(req, res) {
-	// This method redirect authentication to fixed-gateway at port 9000
 
-	//postRemoteLogin (remote to :9000)
-	var options = {
-		// headers:{
-		// 	"X-My-Header": "This is a custom header field"
-		// },
-		method: 'post',
-	};
-
-	var email = req.query.email
-	var password = req.query.password
-
-	fetchUrl('http://' + config.ip + ':' + config.gatewayPort + '/postRemoteLogout',
-		options,
-		function(error, meta, body){
-			if (error) {
-				res.status(400).send(error);
-			} else {
-				res.send('OK');
-			}
-	});
-
-};
+ var email = undefined;
+ var password = undefined;
+ var confirmPassword = undefined;
 
 /**
  * POST /signup
@@ -68,9 +47,15 @@ exports.postRemoteSignup = function(req, res, next) {
 			payload: '{}'
 		};
 
-		var email = req.query.email
-		var password = req.query.password
-	  var confirmPassword = req.query.confirmPassword;
+			if (reqQueryStringLength > 0) {
+				email = req.query.email
+				password = req.query.password
+			  confirmPassword = req.query.confirmPassword;
+			} else {
+				email = req.body.email;
+				password = req.body.password;
+			  confirmPassword = req.body.confirmPassword;
+			}
 
 		fetchUrl('http://' + config.ip + ':' + config.gatewayPort + '/postRemoteSignup' + '/?email=' + email + '&password=' + password + '&confirmPassword=' + confirmPassword,
 			options,
@@ -100,8 +85,15 @@ exports.postRemoteLogin = function(req, res, next) {
 		method: 'post',
 	};
 
-	var email = req.query.email
-	var password = req.query.password
+	var reqQueryStringLength = Object.keys(req.query).length;
+
+	if (reqQueryStringLength > 0) {
+		email = req.query.email
+		password = req.query.password
+	} else {
+		email = req.body.email;
+		password = req.body.password;
+	}
 
 	fetchUrl('http://' + config.ip + ':' + config.gatewayPort + '/postRemoteLogin' + '/?email=' + email + '&password=' + password,
 		options,
@@ -112,6 +104,33 @@ exports.postRemoteLogin = function(req, res, next) {
 				res.send(body.toString());
 			}
 
+	});
+
+};
+
+/**
+ * POST /postRemoteLogout
+ * Log out.
+ */
+exports.postRemoteLogout = function(req, res) {
+	// This method redirect authentication to fixed-gateway at port 9000
+
+	//postRemoteLogin (remote to :9000)
+	var options = {
+		// headers:{
+		// 	"X-My-Header": "This is a custom header field"
+		// },
+		method: 'post',
+	};
+
+	fetchUrl('http://' + config.ip + ':' + config.gatewayPort + '/postRemoteLogout',
+		options,
+		function(error, meta, body){
+			if (error) {
+				res.status(400).send(error);
+			} else {
+				res.send('OK');
+			}
 	});
 
 };
