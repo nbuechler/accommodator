@@ -14,6 +14,10 @@ The file 'app.js' which is at the root of the project was originated from the ha
 * The main goal is to break this microservice into smaller component service parts
 * Should this go well, it is prudent to consider dockerizing the auth project
 
+# TODO
+* Refactor - Controllers into more discrete modular sections of code
+* Chore - Plan out server configuration settings
+
 # Deploy instructions, for node 4.0+ running on AWS
 I had to create the directory for the node-sass binding
 1. kind-assistant/node_modules/node-sass-middleware/node_modules/node-sass/vendor
