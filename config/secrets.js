@@ -25,5 +25,6 @@ module.exports = {
   sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
   gatewayServer: '0.0.0.0',
   gatewayPort: '9000',
-
+  interceptorServer: '0.0.0.0',
+  gatewayPort: '6000',
 };
