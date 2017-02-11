@@ -7,7 +7,7 @@ var fetchUrl = require("fetch").fetchUrl;
 
 var interceptorAPI = null;
 if(process.argv[2] == 'dev'){
- interceptorAPI = '0.0.0.0:5000';
+ interceptorAPI = '0.0.0.0:6000';
 } else if(process.argv[2] == 'production') {
  interceptorAPI = '52.87.224.145:80';
 }
@@ -260,6 +260,25 @@ exports.friendsOverview = function(req, res) {
   fetchUrl("http://" + interceptorAPI + "/friends/overview/" + req.query.credentials, options, function(error, meta, body){
     console.log(body.toString());
     console.log(req.query.credentials);
+    res.send(body.toString());
+  });
+};
+
+/**
+ * POST /
+ * Interceptor method to run affect scoring.
+ */
+
+exports.analyzeEmotionSet = function(req, res) {
+  var options = {
+       headers:{
+           "X-My-Header": "This is a custom header field"
+       },
+       method: 'POST'
+   }
+
+  fetchUrl("http://" + interceptorAPI + "/nlp/analyze_emotion_set/big_6/", options, function(error, meta, body){
+    console.log(body.toString());
     res.send(body.toString());
   });
 };

@@ -181,6 +181,12 @@ app.route('/logs/:logId')
 	.put(/*users.requiresLogin, logController.hasAuthorization,*/ logController.update)
 	.delete(/*users.requiresLogin, logController.hasAuthorization,*/ logController.delete);
 
+/**
+ * Log routes.
+ */
+app.route('/analyzeEmotionSet')
+	.post(/*users.requiresLogin,*/ interceptorController.analyzeEmotionSet);
+
 // Finish by binding the Log middleware
 app.param('logId', logController.logByID);
 
