@@ -17,6 +17,7 @@ The file 'app.js' which is at the root of the project was originated from the ha
 # TODO
 * Refactor - Controllers into more discrete modular sections of code
 * Chore - Plan out server configuration settings
+* Chore - Make sure all servers work together
 
 # Deploy instructions, for node 4.0+ running on AWS
 I had to create the directory for the node-sass binding
