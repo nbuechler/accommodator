@@ -1,3 +1,5 @@
+var secrets = require('../config/secrets');
+
 /**
  * GET /
  * Interceptor page.
@@ -5,9 +7,15 @@
 
 var fetchUrl = require("fetch").fetchUrl;
 
+
+var config = {
+	"ip": secrets.interceptorServer,
+	"interceptorPort": secrets.interceptorPort,
+}
+
 var interceptorAPI = null;
 if(process.argv[2] == 'dev'){
- interceptorAPI = '0.0.0.0:6000';
+ interceptorAPI = config.ip + ':' + config.interceptorPort;
 } else if(process.argv[2] == 'production') {
  interceptorAPI = '52.87.224.145:80';
 }
@@ -274,11 +282,16 @@ exports.analyzeEmotionSet = function(req, res) {
        headers:{
            "X-My-Header": "This is a custom header field"
        },
-       method: 'POST'
+       method: 'POST',
+			 payload: JSON.stringify(req.body)
    }
 
-  fetchUrl("http://" + interceptorAPI + "/nlp/analyze_emotion_set/big_6/", options, function(error, meta, body){
-    console.log(body.toString());
+	// console.log('here');
+	// console.log(req.body);
+	// console.log('======');
+
+  fetchUrl("http://0.0.0.0:5000/nlp/analyze_emotion_set/big_6/", options, function(error, meta, body){
+    // console.log(body.toString());
     res.send(body.toString());
   });
 };
