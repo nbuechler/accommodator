@@ -26,5 +26,5 @@ module.exports = {
   gatewayServer: '0.0.0.0',
   gatewayPort: '9000',
   interceptorServer: '0.0.0.0',
-  gatewayPort: '6000',
+  interceptorPort: '6000',
 };
