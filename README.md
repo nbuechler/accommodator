@@ -1,6 +1,9 @@
 # kind-assistant
 With the idea of bridging the front-end and back-end apps of _Logro_, this project aims to provide interfaces so that every app is modular. It works in tandem with the project called 'hungry-interceptor' which provides similar functionality, but only for back-end apps.
 
+# Notes
+See zenful-automata, another project for _Logro_ which assists in starting servers in unison.
+
 # History
 The controllers directory, written with express.js, includes code from two main areas:
 1. 'activity.js', 'experience.js', and 'log.js' are the main centers of business logic which originated in the project called 'evgroio' - these methods were refactored to work with this application
@@ -9,15 +12,13 @@ The controllers directory, written with express.js, includes code from two main 
 The file 'app.js' which is at the root of the project was originated from the hackathon-starter project: https://github.com/sahat/hackathon-starter
 
 # Future goals
-* Remove authentication/authorization logic in this project, and keep business logic into this project
+* (DONE) Remove authentication/authorization logic in this project, and keep business logic into this project
 * Then, in the other project, use JWT tokens.
 * The main goal is to break this microservice into smaller component service parts
 * Should this go well, it is prudent to consider dockerizing the auth project
 
 # TODO
 * Refactor - Controllers into more discrete modular sections of code
-* Chore - Plan out server configuration settings
-* Chore - Make sure all servers work together
 * Feat - Build method calls to retrieve previously run analyses
 
 # Deploy instructions, for node 4.0+ running on AWS
