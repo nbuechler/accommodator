@@ -6,7 +6,7 @@ var secrets = require('../config/secrets');
  */
 
 var fetchUrl = require("fetch").fetchUrl;
-
+var rp = require('request-promise');
 
 var config = {
 	"ip": secrets.interceptorServer,
@@ -279,19 +279,25 @@ exports.friendsOverview = function(req, res) {
 
 exports.analyzeEmotionSet = function(req, res) {
   var options = {
-       headers:{
-           "X-My-Header": "This is a custom header field"
-       },
+ 			 uri: "http://0.0.0.0:5000/nlp/analyze_emotion_set/big_6/",
        method: 'POST',
-			 payload: JSON.stringify(req.body)
+			 body: JSON.stringify(req.body),
+			//  body: {
+      //   some: 'payload'
+	    //  },
+			 json: true // Automatically stringifies the body to JSON
    }
 
-	// console.log('here');
-	// console.log(req.body);
-	// console.log('======');
+	console.log('here');
+	console.log(req.body);
+	console.log('======');
 
-  fetchUrl("http://0.0.0.0:5000/nlp/analyze_emotion_set/big_6/", options, function(error, meta, body){
-    // console.log(body.toString());
-    res.send(body.toString());
-  });
+  rp(options)
+	  .then(function(body){
+	    console.log(body);
+	    res.send(JSON.stringify(body));
+	  })
+		.catch(function (err) {
+			console.log(err);
+	  });
 };
