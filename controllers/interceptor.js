@@ -279,22 +279,19 @@ exports.friendsOverview = function(req, res) {
 
 exports.analyzeEmotionSet = function(req, res) {
   var options = {
- 			 uri: "http://0.0.0.0:5000/nlp/analyze_emotion_set/big_6/",
+ 			 uri: "http://0.0.0.0:5000/nlp/analyze_emotion_set/",
        method: 'POST',
 			 body: JSON.stringify(req.body),
-			//  body: {
-      //   some: 'payload'
-	    //  },
 			 json: true // Automatically stringifies the body to JSON
    }
 
-	console.log('here');
-	console.log(req.body);
-	console.log('======');
+	// console.log('here');
+	// console.log(req.body);
+	// console.log('======');
 
   rp(options)
 	  .then(function(body){
-	    console.log(body);
+	    // console.log(body);
 	    res.send(JSON.stringify(body));
 	  })
 		.catch(function (err) {
