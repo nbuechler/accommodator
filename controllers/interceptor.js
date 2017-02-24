@@ -298,3 +298,25 @@ exports.analyzeEmotionSet = function(req, res) {
 			console.log(err);
 	  });
 };
+
+/**
+ * GET /
+ * Interceptor method to retrieve all prior run analyses.
+ */
+
+exports.retrieveAllRunAnalyses = function(req, res) {
+  var options = {
+       headers:{
+           "X-My-Header": "This is a custom header field"
+       },
+       method: 'GET'
+  }
+
+	var page = 1
+	var count_per_page = 100
+  fetchUrl("http://" + interceptorAPI + "/retrieve_all_run_analyses/" + page + "/" + count_per_page  + "/", options, function(error, meta, body){
+    console.log(body.toString());
+    console.log(req.query.credentials);
+    res.send(body.toString());
+  });
+};
