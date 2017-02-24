@@ -182,10 +182,13 @@ app.route('/logs/:logId')
 	.delete(/*users.requiresLogin, logController.hasAuthorization,*/ logController.delete);
 
 /**
- * Log routes.
+ * Affect routes.
  */
 app.route('/analyzeEmotionSet')
 	.post(/*users.requiresLogin,*/ interceptorController.analyzeEmotionSet);
+
+app.get('/retrieveAllRunAnalyses', cors(), interceptorController.retrieveAllRunAnalyses); //'This is CORS-enabled for all origins!'
+
 
 // Finish by binding the Log middleware
 app.param('logId', logController.logByID);
