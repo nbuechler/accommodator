@@ -314,9 +314,10 @@ exports.retrieveAllRunAnalyses = function(req, res) {
 
 	var page = 1
 	var count_per_page = 100
-  fetchUrl("http://" + interceptorAPI + "/retrieve_all_run_analyses/" + page + "/" + count_per_page  + "/", options, function(error, meta, body){
+	var collection = 'test_a'
+  // fetchUrl("http://0.0.0.0:5000/nlp/analyses/test_a/1/10/", options, function(error, meta, body){
+  fetchUrl("http://" + interceptorAPI + "/nlp/analyses/" + collection + "/" + page + "/" + count_per_page  + "/", options, function(error, meta, body){
     console.log(body.toString());
-    console.log(req.query.credentials);
-    res.send(body.toString());
+    res.send(JSON.parse(body.toString()));
   });
 };
