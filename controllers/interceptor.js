@@ -281,7 +281,7 @@ exports.analyzeEmotionSet = function(req, res) {
   var options = {
  			 uri: "http://0.0.0.0:5000/nlp/analyze_emotion_set/",
        method: 'POST',
-			 body: JSON.stringify(req.body),
+			 body: req.body,
 			 json: true // Automatically stringifies the body to JSON
    }
 
