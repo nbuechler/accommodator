@@ -312,11 +312,31 @@ exports.retrieveAllRunAnalyses = function(req, res) {
        method: 'GET'
   }
 
+	// TODO: Make this variable for page/count based on request input
 	var page = 1
-	var count_per_page = 100
+	var count_per_page = 5
+	// TODO: Make this variable for collection based on request input
 	var collection = 'all_records'
   // fetchUrl("http://0.0.0.0:5000/nlp/analyses/test_a/1/10/", options, function(error, meta, body){
   fetchUrl("http://" + interceptorAPI + "/nlp/analyses/" + collection + "/" + page + "/" + count_per_page  + "/", options, function(error, meta, body){
+    console.log(body.toString());
+    res.send(JSON.parse(body.toString()));
+  });
+};
+
+exports.retrieveRunAnalysesStats = function(req, res) {
+  var options = {
+       headers:{
+           "X-My-Header": "This is a custom header field"
+       },
+       method: 'GET'
+  }
+
+	// TODO: Find a way to get the total number of processes as part of the stats
+	// Stats section for each user?
+	// TODO: Make this variable for collection based on request input
+	var collection = 'all_records'
+  fetchUrl("http://" + interceptorAPI + "/nlp/analyses/" + collection + "/stats/", options, function(error, meta, body){
     console.log(body.toString());
     res.send(JSON.parse(body.toString()));
   });
