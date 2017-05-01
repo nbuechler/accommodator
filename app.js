@@ -188,6 +188,7 @@ app.route('/analyzeEmotionSet')
 	.post(/*users.requiresLogin,*/ interceptorController.analyzeEmotionSet);
 
 app.get('/retrieveAllRunAnalyses', cors(), interceptorController.retrieveAllRunAnalyses); //'This is CORS-enabled for all origins!'
+app.get('/retrieveRunAnalysesStats', cors(), interceptorController.retrieveRunAnalysesStats); //'This is CORS-enabled for all origins!'
 
 
 // Finish by binding the Log middleware
