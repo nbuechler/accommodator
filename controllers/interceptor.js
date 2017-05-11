@@ -312,14 +312,16 @@ exports.retrieveAllRunAnalyses = function(req, res) {
        method: 'GET'
   }
 
+	var query = req.query;
+
 	// TODO: Make this variable for page/count based on request input
-	var page = 1
-	var count_per_page = 5
+	var page = query.page
+	var count_per_page = query.countPerPage
 	// TODO: Make this variable for collection based on request input
 	var collection = 'all_records'
   // fetchUrl("http://0.0.0.0:5000/nlp/analyses/test_a/1/10/", options, function(error, meta, body){
   fetchUrl("http://" + interceptorAPI + "/nlp/analyses/" + collection + "/" + page + "/" + count_per_page  + "/", options, function(error, meta, body){
-    console.log(body.toString());
+    // console.log(body.toString());
     res.send(JSON.parse(body.toString()));
   });
 };
