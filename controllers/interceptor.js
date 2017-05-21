@@ -334,8 +334,7 @@ exports.retrieveRunAnalysesStats = function(req, res) {
        method: 'GET'
   }
 
-	// TODO: Find a way to get the total number of processes as part of the stats
-	// Stats section for each user?
+	// Get the total number of processes as part of the stats
 	// TODO: Make this variable for collection based on request input
 	var collection = 'all_records'
   fetchUrl("http://" + interceptorAPI + "/nlp/analyses/" + collection + "/stats/", options, function(error, meta, body){
