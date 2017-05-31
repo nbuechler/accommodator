@@ -314,7 +314,7 @@ exports.retrieveAllRunAnalyses = function(req, res) {
 
 	var query = req.query;
 
-	// TODO: Make this variable for page/count based on request input
+	// Get page/count based on request input
 	var page = query.page
 	var count_per_page = query.countPerPage
 	// TODO: Make this variable for collection based on request input
@@ -338,7 +338,29 @@ exports.retrieveRunAnalysesStats = function(req, res) {
 	// TODO: Make this variable for collection based on request input
 	var collection = 'all_records'
   fetchUrl("http://" + interceptorAPI + "/nlp/analyses/" + collection + "/stats/", options, function(error, meta, body){
-    console.log(body.toString());
+    // console.log(body.toString());
+    res.send(JSON.parse(body.toString()));
+  });
+};
+
+exports.retrieveRunAnalysis = function(req, res) {
+  var options = {
+       headers:{
+           "X-My-Header": "This is a custom header field"
+       },
+       method: 'GET'
+  }
+
+	var query = req.query;
+
+	console.log(query);
+
+	// Get the total number of processes as part of the stats
+	// TODO: Make this variable for collection based on request input
+	var collection = 'all_records'
+	var id = query.analysis_id;
+  fetchUrl("http://" + interceptorAPI + "/nlp/analyses/" + collection + "/" + id + "/", options, function(error, meta, body){
+    // console.log(body.toString());
     res.send(JSON.parse(body.toString()));
   });
 };
