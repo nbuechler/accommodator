@@ -8,13 +8,13 @@ See zenful-automata, another project for _Logro_ which assists in starting serve
 The controllers directory, written with express.js, includes code from two main areas:
 1. 'activity.js', 'experience.js', and 'log.js' are the main centers of business logic which originated in the project called 'evgroio' - these methods were refactored to work with this application
 2. Interceptors are the key to acting as middleware between front-end apps and the 'hungry-interceptor' project interfaces that provide statistical and processed information of logs/experiences/activities
+3. Removed authentication/authorization logic in this project, and keep business routing logic into this project
+4. Then, in this project, JWT tokens are used to store information for other projects to use.
+5. The main goal is to break this microservice into smaller component service parts
 
 The file 'app.js' which is at the root of the project was originated from the hackathon-starter project: https://github.com/sahat/hackathon-starter
 
 # Future goals
-* (DONE) Remove authentication/authorization logic in this project, and keep business logic into this project
-* Then, in the other project, use JWT tokens.
-* The main goal is to break this microservice into smaller component service parts
 * Should this go well, it is prudent to consider dockerizing the auth project
 
 # TODO
